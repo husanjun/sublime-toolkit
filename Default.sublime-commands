@@ -1,0 +1,10 @@
+[
+    {
+        "caption": "Sublime Toolkit: add context menu",
+        "command": "add_win_context_menu"
+    },
+    {
+        "caption": "Sublime Toolkit: delete context menu",
+        "command": "del_win_context_menu"
+    }
+]

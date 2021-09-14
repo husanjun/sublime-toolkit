@@ -1,2 +1,2 @@
-# sublime-tools
-small tools for sublime text
+# sublime-toolkit
+Small tools for sublime text

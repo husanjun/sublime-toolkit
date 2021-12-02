@@ -15,8 +15,8 @@ class HtmlSmartyFormat(sublime_plugin.ViewEventListener):
 
     @classmethod
     def is_applicable(cls, settings) -> bool:
-        scopes = cls.view.scope_name(cls.view.sel()[0].begin())
-        return 'text.html' in scopes
+        syntax = sublime.syntax_from_path(settings.get('syntax'))
+        return 'text.html' in syntax.scope if syntax else False
 
     def on_post_text_command(self, command_name, args):
         if command_name in ('lsp_format_document', 'lsp_format_document_range'):

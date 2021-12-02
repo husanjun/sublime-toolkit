@@ -3,12 +3,21 @@ import sublime_plugin
 
 
 class HtmlSmartyFormatHandleCommand(sublime_plugin.TextCommand):
+
     def run(self, edit):
-        regions = self.view.find_all('{ /')
+        regions = self.view.find_all(r'{\s/')
         if regions:
             for region in regions:
                 self.view.replace(edit, region, '{/')
 
-class HtmlSmartyFormat(sublime_plugin.EventListener):
-    def on_pre_save(self, view):
-        view.run_command("html_smarty_format_handle")
+
+class HtmlSmartyFormat(sublime_plugin.ViewEventListener):
+
+    @classmethod
+    def is_applicable(cls, settings) -> bool:
+        scopes = cls.view.scope_name(cls.view.sel()[0].begin())
+        return 'text.html' in scopes
+
+    def on_post_text_command(self, command_name, args):
+        if command_name in ('lsp_format_document', 'lsp_format_document_range'):
+            sublime.set_timeout_async(lambda: self.view.run_command("html_smarty_format_handle"))

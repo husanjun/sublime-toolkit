@@ -12,15 +12,12 @@ class HtmlSmartyFormatHandleCommand(sublime_plugin.TextCommand):
                 self.view.replace(edit, region, '{/')
 
 
-class HtmlSmartyFormat(sublime_plugin.ViewEventListener):
+class HtmlSmartyFormat(sublime_plugin.EventListener):
 
-    @classmethod
-    def is_applicable(cls, settings) -> bool:
-        syntax = sublime.syntax_from_path(settings.get('syntax'))
-        return 'text.html' in syntax.scope if syntax else False
-
-    def on_pre_save(self):
-        sublime.set_timeout(lambda: self.view.run_command("html_smarty_format_handle"))
+    def on_pre_save(self, view):
+        syntax = sublime.syntax_from_path(view.settings().get('syntax'))
+        if syntax and 'text.html' in syntax.scope:
+            sublime.set_timeout_async(lambda: view.run_command("html_smarty_format_handle"))
 
     # def on_post_text_command(self, command_name, args):
     #     if command_name in ('lsp_format_document', 'lsp_format_document_range'):

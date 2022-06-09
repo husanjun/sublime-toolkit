@@ -5,4 +5,7 @@ import os
 
 class AutoFoldCode(sublime_plugin.EventListener):
     def on_load_async(self, view):
-        view.run_command("fold_by_level", {"level": 1})
+        view.run_command("fold_by_level", {"level": 2})
+
+    def on_reload_async(self, view):
+        view.run_command("fold_by_level", {"level": 2})

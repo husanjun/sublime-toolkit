@@ -74,7 +74,8 @@ class AddWinContextMenuCommand(sublime_plugin.WindowCommand):
 
     def on_select(self, index: int) -> None:
         self.index = index
-        self.window.show_input_panel('executable path:', '', self.path_callback, None, None)
+        sublime.set_timeout(lambda: self.path_callback(sublime.executable_path()), 10)
+        # self.window.show_input_panel('executable path:', '', self.path_callback, None, None)
 
     def path_callback(self, path: str) -> None:
         self.window.show_input_panel('context menu name:', 'Open with {}'.format(os.path.basename(path).split('.')[0]),

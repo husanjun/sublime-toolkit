@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sublime
 import sublime_plugin
 import winreg
@@ -94,7 +95,7 @@ class AddWinContextMenuCommand(sublime_plugin.WindowCommand):
         add_context_menu(menu_name, path, r'*\\shell')
 
     def add_context_folder(self, menu_name: str, path: str) -> None:
-        add_context_menu(menu_name, path, 'Directory\\shell')
+        add_context_menu(menu_name, path, r'Directory\\shell')
 
 
 class DelWinContextMenuCommand(sublime_plugin.WindowCommand):
@@ -104,4 +105,4 @@ class DelWinContextMenuCommand(sublime_plugin.WindowCommand):
 
     def menu_callback(self, menu_name: str) -> None:
         del_context_menu(menu_name, r'*\\shell')
-        del_context_menu(menu_name, 'Directory\\shell')
+        del_context_menu(menu_name, r'Directory\\shell')

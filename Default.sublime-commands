@@ -8,6 +8,10 @@
         "command": "del_win_context_menu"
     },
     {
+        "caption": "Sublime Toolkit: add env var",
+        "command": "add_win_env_var"
+    },
+    {
         "caption": "Preferences: Mouse Bindings",
         "command": "edit_settings",
         "args": {
